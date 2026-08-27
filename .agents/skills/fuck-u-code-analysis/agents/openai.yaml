@@ -1,0 +1,7 @@
+interface:
+  display_name: "fuck-u-code 分析"
+  short_description: "运行 fuck-u-code 并解读代码质量热点结果"
+  default_prompt: "Use $fuck-u-code-analysis to analyze this repo and summarize the worst quality hotspots."
+
+policy:
+  allow_implicit_invocation: true

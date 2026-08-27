@@ -1,0 +1,4 @@
+interface:
+  display_name: "前端开发"
+  short_description: "Vue 前端开发约束与验证规则"
+  default_prompt: "在处理 Vue 前端 UI、路由、缓存、组件、Vitest 或构建链路变更时使用 frontend-work。"

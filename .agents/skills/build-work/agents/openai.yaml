@@ -1,0 +1,4 @@
+interface:
+  display_name: "测试驱动实现"
+  short_description: "按计划采用测试驱动方式实施并选择合适的单人、顺序或并行模式"
+  default_prompt: "使用 $build-work 按计划以测试驱动方式完成实现。"

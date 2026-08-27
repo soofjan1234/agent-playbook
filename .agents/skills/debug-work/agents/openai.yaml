@@ -1,0 +1,4 @@
+interface:
+  display_name: "系统化排障"
+  short_description: "通过稳定复现、证据追踪和单一假设定位根因并完成回归验证"
+  default_prompt: "使用 $debug-work 系统排查这个故障并修复根因。"

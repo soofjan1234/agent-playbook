@@ -1,0 +1,4 @@
+interface:
+  display_name: "需求澄清与设计"
+  short_description: "通过分级访谈收敛目标、约束、方案并在实现前取得设计批准"
+  default_prompt: "使用 $shape-work 澄清这个需求并给出可审批的设计。"

@@ -1,0 +1,7 @@
+interface:
+  display_name: "Token Retrospective"
+  short_description: "Reflect on slow turns and extract compact durable rules."
+  default_prompt: "Use $token-retrospective to explain why this turn took long and suggest one AGENTS.md rule."
+
+policy:
+  allow_implicit_invocation: true

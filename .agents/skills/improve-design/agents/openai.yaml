@@ -1,0 +1,4 @@
+interface:
+  display_name: "领域与架构设计"
+  short_description: "统一领域语言并通过深模块原则改善接口、边界、归属与可测试性"
+  default_prompt: "使用 $improve-design 改善当前模块的领域表达和架构设计。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "验证与收尾"
+  short_description: "依据当前验证证据安全完成分支集成、拉取请求、保留或会话移交"
+  default_prompt: "使用 $finish-work 验证当前工作并选择安全的收尾方式。"

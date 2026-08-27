@@ -1,0 +1,7 @@
+interface:
+  display_name: "项目复盘沉淀"
+  short_description: "把项目特有的任务教训转化为可发现、可验证的仓库级规则或 Skill"
+  default_prompt: "使用 $project-retrospective 复盘这次任务，并提出最小的项目级沉淀方案。"
+
+policy:
+  allow_implicit_invocation: true
