@@ -1,6 +1,6 @@
 ---
 name: build-work
-description: "Use when the user asks Codex to implement an already-approved design, execute a concrete plan, or fix a bug with a known root cause. Do not use while goals, constraints, success criteria, observability strategy, experiment shape, API contract, or rollout decisions are still being clarified; use shape-work first in those cases."
+description: "Use when the user asks Codex to implement an approved system design, execute a concrete plan, or fix a bug with a known root cause. Route unclear scope or acceptance to shape-work, unclear architecture or contracts to design-work, and unclear execution steps to plan-work."
 ---
 
 # 测试驱动实现
@@ -9,7 +9,7 @@ description: "Use when the user asks Codex to implement an already-approved desi
 
 ## 核心关卡
 
-1. 先完整理解需求或计划；关键歧义退回 `shape-work` 或 `plan-work`。
+1. 先完整理解已确认范围、系统设计或计划；范围与验收歧义退回 shape-work，架构与契约歧义退回 design-work，执行步骤歧义退回 plan-work。
 2. 检查分支和工作区是否安全；需要隔离时优先使用平台原生能力，再考虑 Git worktree。
 3. 每个行为执行 RED → GREEN → REFACTOR：先看到测试按预期失败，再写最小实现。
 4. 定期运行目标测试和类型检查，全部完成后运行相关完整验证。
@@ -25,6 +25,8 @@ description: "Use when the user asks Codex to implement an already-approved desi
 5. 运行目标测试和相邻测试。
 6. 在保持绿色的前提下重构。
 7. 继续下一个行为。
+
+实现中发现契约变化或新的长期限制时，先处理必要的设计确认，再更新对应权威正文。文档写回遵循 [文档管理规则](../references/documentation-policy.md)，不把变更历史复制成第二份当前说明。
 
 测试应一例一行为，名称表达业务预期，尽量使用真实代码，只模拟不可避免的边界。测试难写通常意味着接口或接缝需要简化。
 

@@ -19,10 +19,10 @@
 ## 阶段转换
 
 ```text
-模糊需求 → shape-work → plan-work → build-work → review-work → finish-work
+模糊需求 → shape-work → design-work → plan-work → build-work → review-work → finish-work
 已明确小改 → build-work → finish-work
 未知故障 → debug-work → build-work → finish-work
-架构问题 → improve-design → shape-work → plan-work
+已有系统的架构问题 → improve-design → plan-work
 ```
 
-任何阶段发现关键假设不成立时，返回产生该假设的上游阶段，不要在下游用补丁掩盖。
+shape-work 只对齐做什么及何时算成功；design-work 决定如何实现。design-work 发现范围不可行时返回 shape-work，plan-work 发现契约或架构未决定时返回 design-work。任何阶段发现关键假设不成立时，返回产生该假设的上游阶段，不要在下游用补丁掩盖。

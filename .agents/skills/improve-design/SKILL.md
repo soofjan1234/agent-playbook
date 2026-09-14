@@ -9,7 +9,7 @@ description: "Use when Codex needs to unify domain language, record architecture
 
 ## 核心关卡
 
-1. 先读取现有 `CONTEXT.md`、ADR、公共接口和调用关系。
+1. 先读取项目已有的领域或架构说明、ADR、公共接口和调用关系；没有既有入口时再决定是否需要新增。
 2. 区分领域概念、实现细节和含糊代称；同一概念只保留一个稳定名称。
 3. 用边缘场景检验术语和边界，而不是只整理词汇表。
 4. 优先设计深模块：用小而稳定的接口隐藏大量内部行为。
@@ -19,7 +19,7 @@ description: "Use when Codex needs to unify domain language, record architecture
 
 - 记录核心术语、定义、非例和关系。
 - 发现术语冲突时立即澄清，不在变量、文档和接口中继续扩散。
-- 稳定事实写入 `CONTEXT.md`；具有取舍和后果的决定写入 ADR。
+- 稳定事实优先更新项目已有的领域或架构正文；具有长期取舍和后果的决定写入 ADR。
 - 单体项目默认单一上下文；只有真实大型多领域仓库才建立上下文地图。
 
 ## 架构改进
@@ -28,7 +28,7 @@ description: "Use when Codex needs to unify domain language, record architecture
 2. 分析变化经常跨越哪些文件和边界。
 3. 提出 2～3 个接口或模块归属方案。
 4. 评价复杂度隐藏、局部性、测试性、迁移成本和兼容风险。
-5. 选择最小可验证切片交给 `shape-work` 或 `plan-work`。
+5. 若改进改变产品范围，交给 shape-work；若范围不变但需要批准系统方案，交给 design-work；已有批准方案则交给 plan-work。
 
 仅当多个架构候选的关系难以用文字比较时才制作可视化报告。
 

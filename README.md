@@ -5,7 +5,7 @@
 ## 包含内容
 
 - `AGENTS.md`：通用的设计、检索、验证、文档和 Windows/Codex 环境约定。
-- `.agents/skills/`：需求澄清、计划、实现、排查、审查、完成验证和架构改善等阶段型 Skills。
+- `.agents/skills/`：需求澄清、系统设计、实施计划、实现、排查、审查、完成验证和架构改善等阶段型 Skills。
 - `.agents/skills/backend-work/` 与 `frontend-work/`：后端和前端变更时配合阶段型 Skill 使用的领域约定。
 - `.agents/skills/references/`：阶段型 Skills 共用的工作流等级和状态账本说明；它不是一个可直接调用的 Skill。
 
@@ -20,7 +20,15 @@ your-project/
    └─ skills/
 ```
 
-启动 Codex 后，它会从项目根目录的 `AGENTS.md` 读取约定，并发现 `.agents/skills/*/SKILL.md` 中的 Skills。你可以在提示中显式使用 `$shape-work`、`$build-work`、`$review-work` 等，也可以让 Codex 按 Skill 的描述自动匹配。
+启动 Codex 后，它会从项目根目录的 `AGENTS.md` 读取约定，并发现 `.agents/skills/*/SKILL.md` 中的 Skills。你可以在提示中显式使用 `$shape-work`、`$design-work`、`$plan-work`、`$build-work`、`$review-work` 等，也可以让 Codex 按 Skill 的描述自动匹配。
+
+阶段型开发默认按以下顺序推进：
+
+```text
+shape-work → design-work → plan-work → build-work → review-work → finish-work
+```
+
+`shape-work` 通过少量多轮提问对齐目标、范围、不做什么和整体验收；`design-work` 负责架构、数据模型、状态流和接口契约；`plan-work` 再将已确认设计拆成具体文件、实施步骤和测试。
 
 ## 设计原则
 

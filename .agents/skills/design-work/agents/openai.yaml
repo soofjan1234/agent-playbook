@@ -1,0 +1,4 @@
+interface:
+  display_name: "系统设计"
+  short_description: "基于已确认需求设计架构、数据、状态、接口和关键风险验证"
+  default_prompt: "使用 $design-work 将已确认的需求范围转化成可审批的系统设计。"
