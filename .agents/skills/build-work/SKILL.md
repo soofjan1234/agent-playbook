@@ -14,7 +14,7 @@ description: "Use when the user asks Codex to implement an approved system desig
 3. 每个行为执行 RED → GREEN → REFACTOR：先看到测试按预期失败，再写最小实现。
 4. 定期运行目标测试和类型检查，全部完成后运行相关完整验证。
 5. 只有任务独立、不会修改相同状态时才并行；否则按依赖顺序执行。
-6. 若当前工作项已登记状态账本，实现期间保持 `待实现`；实现完成且当前环境可运行的自动验证通过、只剩外部或人工验证时改为 `待验证`。具体规则见 [状态账本规范](../references/status-ledger.md)。
+6. 若当前计划已登记主题计划表，实现期间保持 `待实现`；实现完成且当前环境可运行的自动验证通过、只剩外部或人工验证时改为 `待验证`。具体规则见 [状态账本规范](../references/status-ledger.md)。
 
 ## 实现循环
 

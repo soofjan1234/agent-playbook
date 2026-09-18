@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>功能防御地图</title>
+  <style>
+    :root { color-scheme:light; --bg:#f5f7fb; --panel:#fff; --ink:#172033; --muted:#5f6b7c; --line:#d9e0eb; --blue:#2457d6; --blue-soft:#eaf0ff; --amber:#9b5d00; --amber-soft:#fffaf0; --red:#a43a3a; --red-soft:#fff5f5; --green:#14734b; --green-soft:#effaf4; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.55 system-ui,"Microsoft YaHei",sans-serif; }
+    header { padding:24px max(20px,calc((100vw - 1540px)/2)); background:linear-gradient(115deg,#17295d,#2457d6); color:#fff; }
+    h1 { margin:0 0 6px; font-size:26px; } h2 { margin:0 0 12px; font-size:16px; } h3 { margin:0; font-size:15px; } p { margin:6px 0; }
+    main { max-width:1540px; margin:20px auto; padding:0 20px 28px; }
+    .stamp { font-size:13px; opacity:.92; }
+    .panel { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px; box-shadow:0 2px 10px #14204b0d; }
+    .map { margin-bottom:16px; }
+    .map-toolbar { display:flex; align-items:start; justify-content:space-between; gap:16px; }
+    .map-toolbar > div { min-width:0; } .note { color:var(--muted); }
+    .toggle { flex:0 0 auto; border:1px solid var(--blue); border-radius:8px; padding:7px 10px; background:var(--panel); color:var(--blue); font:inherit; font-weight:700; cursor:pointer; }
+    .toggle:hover,.toggle:focus-visible { background:var(--blue-soft); outline:2px solid transparent; }
+    .flow { display:grid; grid-template-columns:repeat(12,minmax(110px,1fr)); gap:10px; overflow:auto; padding:4px; }
+    .flow.compact { display:flex; align-items:stretch; min-height:72px; }
+    .flow.compact .node { flex:0 0 126px; min-height:64px; padding:9px 10px; }
+    .flow.compact .responsibility { display:none; }
+    .node { appearance:none; grid-column:span 3; min-height:116px; text-align:left; padding:12px; background:var(--panel); border:1px solid var(--line); border-radius:10px; color:var(--ink); cursor:pointer; outline-offset:3px; }
+    .node:hover { border-color:var(--blue); }
+    .node[aria-pressed="true"] { border:2px solid var(--blue); background:var(--blue-soft); box-shadow:0 0 0 3px #2457d625; }
+    .step { display:block; color:var(--blue); font-weight:700; font-size:12px; margin-bottom:7px; }
+    .responsibility { display:block; color:var(--muted); font-size:12px; margin-top:7px; }
+    .brief-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:14px 0; }
+    .brief-card { min-width:0; padding:12px; border:1px solid var(--line); border-radius:9px; background:#fbfcff; }
+    .brief-card h4 { margin:0 0 7px; font-size:13px; color:var(--blue); }
+    .brief-card p { margin:0; }
+    .brief-card.terms { background:#f6f8ff; }
+    .brief-card.misconception { border-left:4px solid var(--amber); background:var(--amber-soft); }
+    .brief-card.misconception h4 { color:var(--amber); }
+    .term-list { list-style:none; margin:0; padding:0; } .term-list li + li { margin-top:7px; }
+    .defense-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+    .defense-card { min-width:0; padding:12px; border:1px solid var(--line); border-radius:9px; background:#fbfcff; }
+    .defense-card h4 { margin:0 0 7px; font-size:13px; color:var(--blue); } .defense-card p { margin:5px 0; }
+    .scenario-list { list-style:none; padding:0; margin:0; }
+    .scenario { margin:0 0 9px; padding:9px; border:1px solid var(--line); border-radius:7px; background:#fff; }
+    .scenario:last-child { margin-bottom:0; } .scenario p { color:var(--muted); font-size:12px; }
+    .scenario-proven { border-left:4px solid var(--green); background:var(--green-soft); }
+    .scenario-partial { border-left:4px solid var(--amber); background:var(--amber-soft); }
+    .scenario-pending,.scenario-needs-confirmation { border-left:4px solid var(--red); background:var(--red-soft); }
+    .scenario .status { display:block; margin-bottom:4px; font-size:12px; }
+    .status-proven { color:var(--green); } .status-partial { color:var(--amber); } .status-pending,.status-needs-confirmation { color:var(--red); }
+    .risk { border-left:4px solid var(--red); background:var(--red-soft); } .risk h4 { color:var(--red); }
+    ul { padding-left:20px; margin:7px 0; }
+    footer { margin-top:14px; color:var(--muted); font-size:12px; }
+    @media (max-width:980px) { .defense-grid { grid-template-columns:1fr; } }
+    @media (max-width:780px) { main { padding:0 12px 20px; } header { padding:20px 12px; } .map-toolbar { align-items:center; } .flow:not(.compact) { grid-template-columns:1fr; overflow:visible; } .node { grid-column:auto; min-height:auto; } .brief-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<header>
+  <h1 id="page-title"></h1>
+  <div id="page-summary"></div>
+  <div id="page-stamp" class="stamp"></div>
+</header>
+<main>
+  <section class="panel map" aria-labelledby="map-title">
+    <div class="map-toolbar">
+      <div>
+        <h2 id="map-title">主流程（点击任一节点查看防御义务）</h2>
+        <p class="note">默认紧凑导航；展开后显示完整职责。状态只来自可核验的真实运行证据。</p>
+      </div>
+      <button id="toggle-flow" class="toggle" type="button" aria-expanded="false">展开流程</button>
+    </div>
+    <div id="flow" class="flow compact" role="list"></div>
+  </section>
+  <section class="panel" aria-labelledby="detail-title" aria-live="polite">
+    <h2 id="detail-title">节点防御复盘</h2>
+    <div id="detail"></div>
+  </section>
+  <footer id="page-footer"></footer>
+</main>
+<script>
+// 生成地图时替换这组演示元数据和节点；源码与测试证据只保留在内部取证，不渲染到页面。
+const mapData={
+  title:'功能防御地图',
+  summary:'阶段一 → 阶段二 → 阶段三',
+  stamp:'计划阶段：场景默认标记为待验证；不代表功能已经交付。',
+  footer:'异常、拒绝、恢复与并发已融入对应节点。未充分证明的行为保留在“可能漏掉什么”中。',
+  nodes:[{
+    id:'example-1',step:'示例 · 1',title:'业务节点',responsibility:'用一句短话说明节点职责。',
+    summary:'用一句话说明该节点在完整业务链路中的作用。',
+    example:'角色带着明确前置状态进入，系统执行一个业务动作，最后产生可观察结果。',
+    terms:[['必要术语','只解释理解当前节点必须知道的概念。']],
+    misconception:'不要误解：明确本节点不提供的能力或不会发生的状态变化。',
+    narrative:['说明这一步解决什么问题。','说明谁在什么情况下触发。','按因果顺序说明系统如何处理。','说明成功、拒绝或失败时的结果与意义。'],
+    scenarios:[{title:'应测场景',trigger:'描述输入、状态或触发条件。',outcome:'描述必须观察到的结果。',status:'pending',reason:'本次没有真实运行且能直接证明该结果的测试。'}],
+    risks:['说明尚未充分证明的行为，以及遗漏后可能造成的具体后果。']
+  }]
+};
+const statusLabels={pending:'○ 待验证',proven:'✓ 已证明',partial:'△ 部分证明','needs-confirmation':'? 待确认'};
+const escapeHtml=value=>String(value).replace(/[&<>]/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[char]));
+function renderDefense(node){
+  const terms=node.terms.map(([term,meaning])=>`<li><b>${escapeHtml(term)}</b>：${escapeHtml(meaning)}</li>`).join('');
+  const narrative=node.narrative.map(sentence=>`<p>${escapeHtml(sentence)}</p>`).join('');
+  const scenarios=node.scenarios.map(item=>`<li class="scenario scenario-${item.status}"><span class="status status-${item.status}"><b>${statusLabels[item.status]}</b></span><b>${escapeHtml(item.title)}</b><p>触发：${escapeHtml(item.trigger)}</p><p>应观察：${escapeHtml(item.outcome)}</p><p>状态原因：${escapeHtml(item.reason)}</p></li>`).join('');
+  const risks=node.risks.map(item=>`<li>${escapeHtml(item)}</li>`).join('');
+  return `<h3>${escapeHtml(node.step)}　${escapeHtml(node.title)}</h3><div class="brief-grid"><section class="brief-card"><h4>一句话结论</h4><p>${escapeHtml(node.summary)}</p></section><section class="brief-card"><h4>具体业务例子</h4><p>${escapeHtml(node.example)}</p></section><section class="brief-card terms"><h4>必要术语</h4><ul class="term-list">${terms}</ul></section><section class="brief-card misconception"><h4>不要误解</h4><p>${escapeHtml(node.misconception)}</p></section></div><div class="defense-grid"><section class="defense-card"><h4>做了什么</h4>${narrative}</section><section class="defense-card"><h4>应测场景</h4><ul class="scenario-list">${scenarios}</ul></section><section class="defense-card risk"><h4>可能漏掉什么</h4><ul>${risks}</ul></section></div>`;
+}
+function selectNode(id){
+  const node=mapData.nodes.find(item=>item.id===id);
+  document.querySelectorAll('.node').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.id===id)));
+  document.getElementById('detail').innerHTML=renderDefense(node);
+}
+document.title=mapData.title;
+document.getElementById('page-title').textContent=mapData.title;
+document.getElementById('page-summary').textContent=mapData.summary;
+document.getElementById('page-stamp').textContent=mapData.stamp;
+document.getElementById('page-footer').textContent=mapData.footer;
+const flow=document.getElementById('flow');
+mapData.nodes.forEach(node=>{
+  const button=document.createElement('button');
+  button.type='button'; button.className='node'; button.dataset.id=node.id; button.setAttribute('aria-pressed','false');
+  button.innerHTML=`<span class="step">${escapeHtml(node.step)}</span><strong>${escapeHtml(node.title)}</strong><span class="responsibility">${escapeHtml(node.responsibility)}</span>`;
+  button.addEventListener('click',()=>selectNode(node.id));
+  flow.append(button);
+});
+const toggle=document.getElementById('toggle-flow');
+toggle.addEventListener('click',()=>{
+  const expanded=!flow.classList.contains('expanded');
+  flow.classList.toggle('expanded',expanded); flow.classList.toggle('compact',!expanded);
+  toggle.textContent=expanded?'缩小流程':'展开流程'; toggle.setAttribute('aria-expanded',String(expanded));
+});
+selectNode(mapData.nodes[0].id);
+</script>
+</body>
+</html>

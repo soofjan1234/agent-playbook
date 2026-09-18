@@ -24,10 +24,10 @@ description: "Use when product scope and overall acceptance criteria are already
 
 - 总体设计串起完整核心流程，使读者无需跳转就能理解系统如何工作；API、数据和选型细节通过链接进入专项正文。
 - 同一契约只在一个权威正文维护。设计稿说明拟议行为，当前参考说明已交付行为，必须标明适用性。
-- MVP 优先使用 docs/mvp/design.md 及同组专项文档；后续变更优先使用同一 changes/<topic>/ 目录。项目约定或用户路径优先。
+- MVP 优先使用 docs/mvp/design.md 及同组专项文档；后续变更优先使用同一 `changes/YYYY-MM-DD-<topic>/` 目录。日期是主题首次创建日，后续更新复用该目录。项目约定或用户路径优先。
 - 用户要求写入 design.md 时，按项目约定和既有主题目录选择路径；只有明确指定完整路径或字面文件名时才照字面创建。
 - 已有相关设计时更新原文，不新建平行方案。关键长期取舍才建立 ADR，并从设计引用。
-- 持久化设计时按 [状态账本规范](../references/status-ledger.md) 创建或更新同一工作项。
+- 持久化设计时按 [状态账本规范](../references/status-ledger.md) 更新主题设计表的文档名、确认状态、主要结论和日期；设计确认不代表实现完成。
 
 ## 设计内容
 
@@ -46,7 +46,7 @@ description: "Use when product scope and overall acceptance criteria are already
 - plan-work 决定修改哪些文件、按什么顺序执行和运行哪些测试；本 skill 不提前编写逐文件任务清单。
 - 设计发现目标、范围或验收不可行时，只将受影响部分退回 shape-work 确认。
 - 计划或实现发现未决定的架构、数据、状态或契约问题时，返回本 skill 更新设计并重新批准。
-- 已有系统的领域语言和模块边界专项改进可使用 improve-design；涉及新需求交付时仍由本 skill 维护该主题的系统设计。
+- 已有系统的领域语言或模块边界需要改进时，仍由本 skill 维护设计与审批边界。
 
 ## 红旗
 

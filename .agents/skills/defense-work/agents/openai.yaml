@@ -1,0 +1,6 @@
+interface:
+  display_name: "防御工作流"
+  short_description: "在确认计划后建立应测场景，并以真实测试结果更新验证状态"
+  default_prompt: "使用 $defense-work 基于已确认的 plan.md 建立功能防御地图；若测试已真实运行，再更新场景状态。"
+policy:
+  allow_implicit_invocation: false

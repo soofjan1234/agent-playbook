@@ -50,7 +50,7 @@ description: "Use when a proposed product, feature, behavior change, experiment,
 - 大致交付阶段及每阶段能力。
 - 可观察、可判定的整体验收标准。
 
-用户指定路径时写入该路径；项目已有相关范围正文时更新原文，不创建平行文件。MVP 优先使用 `docs/mvp/README.md`，后续变更优先使用同一主题目录的 `README.md` 或项目既有位置。需要持久化且项目沿用状态账本时，按 [状态账本规范](../references/status-ledger.md) 创建或更新同一工作项。
+用户指定路径时写入该路径；项目已有相关范围正文时更新原文，不创建平行文件。MVP 优先使用 `docs/mvp/README.md`，后续变更优先使用同一主题目录的 `README.md` 或项目既有位置。需要持久化且项目沿用状态账本时，按 [状态账本规范](../references/status-ledger.md) 更新主题说明；只有实际设计或计划文档才登记对应表，不为范围说明虚构计划行。
 
 ## 快速路径
 

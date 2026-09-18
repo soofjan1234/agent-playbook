@@ -40,13 +40,13 @@ description: "Use when an approved design needs to be converted into an implemen
 - 目标测试、相关测试和最终验证命令。
 - 阻塞它的前置任务。
 
-计划与设计归属同一主题。MVP 优先使用 `docs/mvp/plan.md`；后续变更优先使用 `changes/<topic>/plan.md`。项目约定、既有主题目录或用户指令可覆盖。
+计划与设计归属同一主题。MVP 优先使用 `docs/mvp/plan.md`；后续变更优先使用 `changes/YYYY-MM-DD-<topic>/plan.md`，复用主题创建时确定的日期目录。项目约定、既有主题目录或用户指令可覆盖。
 
 复杂计划按可独立验证的交付结果拆分：总计划只保留阶段目标、依赖、顺序、子计划入口和整体验收入口；子计划记录本阶段文件、关键函数、行为变化、测试和通过条件。不要按 controller、service、database 等技术层拆分。
 
 用户说“写到 plan.md”、“落成 plan.md”或类似简写时，按默认日期主题命名保存；只有用户明确给出完整路径或明确要求文件名字面叫 `plan.md`，才使用字面文件名。
 
-正式计划落盘后，按 [状态账本规范](../references/status-ledger.md) 创建或更新 `待实现` 工作项的主要文档、下一步和日期。没有设计记录时由计划首次创建记录；已有记录时不得为同一工作项创建新的月度记录。
+正式计划落盘后，按 [状态账本规范](../references/status-ledger.md) 在主题计划表登记文档名、`待实现` 状态、完成结果、下一步和日期。已有计划更新原行，跨月或跨年继续维护同一主题文件。
 
 ## 自检
 
