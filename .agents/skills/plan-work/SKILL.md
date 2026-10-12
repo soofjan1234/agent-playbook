@@ -1,6 +1,6 @@
 ---
 name: plan-work
-description: "Use when an approved design needs to be converted into an implementation plan, task breakdown, sequencing, test strategy, migration steps, or risk-managed execution checklist. Also use when the user asks to write, save, or land something as plan.md; treat plan.md as shorthand for the default dated plan document unless an exact path or literal filename is specified."
+description: "将已批准的设计拆成可执行任务、依赖和验证；也用于用户要求写入 plan.md 时。范围或架构未明确时先对齐或设计。"
 ---
 
 # 实施计划
@@ -35,12 +35,12 @@ description: "Use when an approved design needs to be converted into an implemen
 每项任务至少包含：
 
 - 创建、修改和测试的精确文件。
-- 先写哪个失败测试，以及预期为什么失败。
+- 与改动类型匹配的验证和预期结果：功能或缺陷明确行为回归；适用 RED 的阶段实现写明失败原因；纯说明修改使用内容、差异或链接检查，不人为制造失败测试。
 - 最小实现步骤。
 - 目标测试、相关测试和最终验证命令。
 - 阻塞它的前置任务。
 
-计划与设计归属同一主题。MVP 优先使用 `docs/mvp/plan.md`；后续变更优先使用 `changes/YYYY-MM-DD-<topic>/plan.md`，复用主题创建时确定的日期目录。项目约定、既有主题目录或用户指令可覆盖。
+计划与设计归属同一主题。MVP 优先使用 `docs/mvp/plan.md`；后续变更优先使用 `docs/changes/YYYY-MM-DD-<topic>/plan.md`，复用主题创建时确定的日期目录。项目约定、既有主题目录或用户指令可覆盖。
 
 复杂计划按可独立验证的交付结果拆分：总计划只保留阶段目标、依赖、顺序、子计划入口和整体验收入口；子计划记录本阶段文件、关键函数、行为变化、测试和通过条件。不要按 controller、service、database 等技术层拆分。
 

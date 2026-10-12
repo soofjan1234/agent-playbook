@@ -54,10 +54,12 @@ Run this skill when the user wants fast repo-local code-quality evidence from `f
 
 ### Overall score
 
-- `90+`: healthy enough for targeted work; do not invent a rewrite justification.
-- `80-89`: workable, but expect concentrated smells in a few subsystems.
-- `70-79`: medium risk; prompts should include stronger guardrails and narrower scope.
-- `<70`: do not let agents roam freely; force staged work and stronger validation.
+分数仅作为定位线索，不是项目风险阈值。高分不能证明权限、迁移或兼容改动安全；低分也不自动要求重写、完整阶段流程或扩大验证。是否升级流程，由具体改动、真实热点、契约影响和实际失败决定。
+
+- `90+`：可先聚焦当前目标，仍检查涉及的风险。
+- `80-89`：检查问题是否集中在少数子系统。
+- `70-79`：优先调查报告中的热点和真实影响。
+- `<70`：调查低分来源，区分运行风险与风格问题；按具体证据决定范围和验证。
 
 ### Metrics
 

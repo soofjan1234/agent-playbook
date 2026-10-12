@@ -1,25 +1,22 @@
 ---
 name: frontend-work
-description: 当 Codex 处理前端代码时使用，尤其是 Vue 组件、路由、store、缓存行为、UI 状态、composable、Vitest 测试、模板、样式、TypeScript 类型、构建链路或浏览器侧行为。若实现、排查、审查或验证涉及前端行为，应与当前阶段型 skill 一起使用，例如 build-work、debug-work、review-work 或 finish-work。
+description: "处理前端实现、排障或审查中的组件、状态、路由、样式和构建约束；配合当前阶段使用，验证跟随项目技术栈。"
 ---
 
 # 前端开发
 
 使用这个 skill，让前端改动保持一致、隔离良好，并且可测试。
 
-## 工作流程
+## 前端关注点
 
-1. 先识别精确的前端改动面：组件、路由、store、composable、缓存 key、事件、prop、emit 或测试。
-2. 优先用精确名称搜索。使用组件名、路由路径、store action、事件名、测试名或可见文案，避免宽泛关键词。
-3. 编码前先阅读同类组件、store、路由、样式和测试。
-4. 匹配现有 UI 模式、数据流、命名、错误展示、加载状态和测试结构。
-5. 将改动限制在用户要求的可见行为范围内。
-6. UI、路由、缓存、状态或行为变化必须补充或更新 Vitest 用例。
-7. 先运行最小有意义的测试；涉及模板、类型、路由或构建链路时再运行构建。
+公共定位、最小改动和验证范围遵循 [公共执行与证据规则](../SKILL.md#公共执行与证据规则)，实施或排障细节由当前阶段负责。
+
+- 沿用项目实际技术栈、UI 模式、数据流、命名、错误展示和加载状态。
+- 状态、路由、缓存和逻辑变化用相关行为测试覆盖；纯布局、配色和样式变化做必要渲染或截图检查，不机械添加 Vitest 用例。
 
 ## Vue 与 Vitest
 
-- Vue 组件测试必须启用自动卸载：
+- 已使用 Vue Test Utils 与 Vitest 的项目，组件测试必须启用自动卸载：
 
 ```ts
 import { enableAutoUnmount } from '@vue/test-utils';
@@ -34,7 +31,7 @@ enableAutoUnmount(afterEach);
 
 ## 验证
 
-- 针对单个 Vitest 文件，运行 `npm run test -- <TestFile>.test.ts`。
-- 改动涉及模板、TypeScript 类型、路由、打包配置、生成导入或构建链路时，运行 `npm run build`。
+- 使用项目实际包管理器、测试和构建配置。若项目的 test 脚本使用 Vitest，可定向运行单文件；`npm run test -- <TestFile>.test.ts` 仅作为该配置下的示例。
+- 涉及模板、类型、路由、打包配置、生成导入或构建链路时，按实际影响运行相关类型或构建检查；`npm run build` 仅适用于项目有该脚本的情况。
 - 如果 Windows 下运行 `npm run test` 或 `npm run build` 时，在 `AppData\Roaming\nvm` 路径报 `EPERM`，提升权限重跑，并说明是 NVM 路径权限导致重试。
 - 无法运行的验证必须说明原因。

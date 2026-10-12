@@ -1,6 +1,6 @@
 ---
 name: review-work
-description: "Use when the user asks Codex to review code changes, a design or proposal, an implementation plan, merge readiness, or external review comments, identifying errors, omissions, simplifications, optimizations, risks, and missing validation. Do not use to create an initial design or implement fixes unless the user separately asks for that work."
+description: "审查代码变更、设计、实施计划或外部审查意见，报告问题与验证缺口。仅审查，不自动修改产物。"
 ---
 
 # 工程评审
