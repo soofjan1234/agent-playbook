@@ -11,6 +11,8 @@ description: "Use when there is a bug, failing test, runtime error, unexpected b
 没有完成根因调查前，不得提出或实施猜测性修复。
 </HARD-GATE>
 
+创建或实质修改 Markdown 文档时，必须同时使用 [md-work](../md-work/SKILL.md)，落实写入前的组织与写后精简检查；纯聊天回答或小幅文字修正不额外加载。
+
 ## 核心关卡
 
 1. 稳定复现问题，或收集足以精确描述失败的证据。

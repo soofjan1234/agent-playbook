@@ -1,15 +1,17 @@
 ---
 name: brief-work
-description: "面向非技术读者解释已调查或核验的实质工程问题、修复和结果。普通聊天、进度通知和未经验证的猜测不使用。"
+description: "Translate material technical problems, fixes, and completed-task results into clear conclusions for non-technical executors or decision-makers. Use when the user asks to explain, summarize, report, state a conclusion, or make technical work understandable."
 ---
 
 # 技术结论翻译与汇报
 
 把已经调查或验证过的技术事实，转成读者能据此判断和行动的说明。它不替代排障、实现、审查或验收 skill；应与当前工程阶段一起使用。
 
+创建或实质修改 Markdown 文档时，必须同时使用 [md-work](../md-work/SKILL.md)，落实写入前的组织与写后精简检查；纯聊天回答或小幅文字修正不额外加载。
+
 ## 适用时机
 
-- 用户需要面向非技术读者解释已经调查或核验的实质工程结论，例如根因、修复效果、风险或完成结果；不因“解释一下”“总结”等词单独触发。
+- 用户说“解释一下”“总结”“结论”“汇报”“给上级看”“说人话”或表示没有看懂技术结果。
 - 当前任务出现了会改变结论、范围、风险或下一步的实质性问题。
 - 问题已定位或修复，或任务已有经过验证的阶段性或最终结果。
 
@@ -31,7 +33,7 @@ description: "面向非技术读者解释已调查或核验的实质工程问题
 
 - 明确区分已验证事实、合理推断和未知项；不要把推断写成结论。
 - 功能验证、性能测试和稳定性验证是不同结论。一次成功运行只能证明对应功能路径可用。
-- 完成或通过的结论遵循 [公共执行与证据规则](../SKILL.md#公共执行与证据规则)，不为同一未变化结果重复运行验证。
+- 只有当前回合的证据支持时，才能说“已解决”“已通过”或“已完成”。
 - 不因汇报需要而增加外部操作、扩大任务范围，或掩盖失败和限制。
 
 ## 输出强度

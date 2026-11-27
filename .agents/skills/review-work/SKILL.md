@@ -1,11 +1,13 @@
 ---
 name: review-work
-description: "审查代码变更、设计、实施计划或外部审查意见，报告问题与验证缺口。仅审查，不自动修改产物。"
+description: "Use when the user asks Codex to review code changes, a design or proposal, an implementation plan, merge readiness, or external review comments, identifying errors, omissions, simplifications, optimizations, risks, and missing validation. Do not use to create an initial design or implement fixes unless the user separately asks for that work."
 ---
 
 # 工程评审
 
 以明确的评审对象、比较基准、需求和当前事实为依据，发现错误、遗漏及可简化或优化之处。
+
+创建或实质修改 Markdown 文档时，必须同时使用 [md-work](../md-work/SKILL.md)，落实写入前的组织与写后精简检查；纯聊天回答或小幅文字修正不额外加载。
 
 ## 核心关卡
 

@@ -14,15 +14,15 @@
 - 不改变代码或外部状态的解释与比较保持零级。
 - 单文件、所有者明确、验证命令明确的任务默认一级。
 - 没有具体风险时，不创建规格、worktree、多 agent 流程或正式审查。
-- 降级不免除当前任务适用的关卡：设计确认范围和批准复用遵循 `AGENTS.md`；未知故障先查明根因；完成结论遵循 [公共执行与证据规则](../SKILL.md#公共执行与证据规则)。不为已有明确批准再启动一轮相同流程。
+- 即使降级，也不得跳过设计批准、根因调查和完成前验证等安全关卡。
 
 ## 阶段转换
 
 ```text
-模糊需求 → shape-work → design-work → plan-work → build-work → review-work → finish-work
+模糊需求或方案 → shape-work → plan-work → build-work → review-work → finish-work
 已明确小改 → build-work → finish-work
 未知故障 → debug-work → build-work → finish-work
-已有系统的架构问题 → design-work → plan-work
+已有系统的架构问题 → shape-work → plan-work
 ```
 
-shape-work 只对齐做什么及何时算成功；design-work 决定如何实现。design-work 发现范围不可行时返回 shape-work，plan-work 发现契约或架构未决定时返回 design-work。任何阶段发现关键假设不成立时，返回产生该假设的上游阶段，不要在下游用补丁掩盖。
+shape-work 在同一份设计中确定目标、范围、关键方案和验证标准；用户确认后直接整理落盘，不另设设计阶段或重复审批。plan-work 发现契约或架构未决定时，回到 shape-work 只补充受影响部分。任何阶段发现关键假设不成立时，返回产生该假设的上游阶段，不要在下游用补丁掩盖。
