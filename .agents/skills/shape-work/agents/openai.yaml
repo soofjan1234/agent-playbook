@@ -1,4 +1,4 @@
 interface:
-  display_name: "需求与范围对齐"
-  short_description: "通过持续追问对齐目标、范围、非目标、交付阶段和整体验收标准"
-  default_prompt: "使用 $shape-work 和我对齐这个需求，明确做什么、不做什么以及验收标准。"
+  display_name: "需求与设计"
+  short_description: "对齐目标、范围和关键方案，形成简要设计并直接整理已确认内容"
+  default_prompt: "使用 $shape-work 和我对齐目标、范围、方案和验证标准，形成可确认的简要设计。"

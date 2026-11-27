@@ -5,6 +5,8 @@ description: "Use when a costly, corrected, or repeatedly troublesome project ta
 
 # 项目复盘沉淀
 
+创建或实质修改 Markdown 文档时，必须同时使用 [md-work](../md-work/SKILL.md)，落实写入前的组织与写后精简检查；纯聊天回答或小幅文字修正不额外加载。
+
 ## 目标
 
 把已经发生的项目问题、用户纠正或高成本路径，转化为当前仓库可发现、可维护的最小知识。重点是防止项目内复发，不把局部经验误写成全局规则。
